@@ -1,0 +1,38 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "bWRDi5QD6kUds8dLef6tj"
+uri = "file://artifacts/grooming-academy/public/images/hero.png"
+type = "image"
+title = "professional pet groomer working"
+
+[[generated]]
+id = "v2Fy-uJcuOwMOpyoLVEmk"
+uri = "file://artifacts/grooming-academy/public/images/mc1.png"
+type = "image"
+title = "dog grooming masterclass one"
+
+[[generated]]
+id = "DdRQyOT0WcUuXhjqpx2Gb"
+uri = "file://artifacts/grooming-academy/public/images/mc2.png"
+type = "image"
+title = "dog grooming masterclass two"
+
+[[generated]]
+id = "J2CbKC3mLTOqYvTuVAYu9"
+uri = "file://artifacts/grooming-academy/public/images/mc3.png"
+type = "image"
+title = "dog grooming masterclass three"
+
+[[generated]]
+id = "dkEF6-RCxhHxyZjkkLVPA"
+uri = "file://artifacts/grooming-academy/public/images/mc4.png"
+type = "image"
+title = "dog grooming masterclass four"
+
+[[generated]]
+id = "d7J4tepBNapAn9PhGlFj4"
+uri = "file://artifacts/grooming-academy/public/images/team.png"
+type = "image"
+title = "grooming academy team"

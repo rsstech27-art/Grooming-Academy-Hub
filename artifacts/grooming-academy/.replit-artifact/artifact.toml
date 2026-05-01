@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Академия груминга Хабаровск"
+version = "1.0.0"
+id = "artifacts/grooming-academy"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 21108
+
+[services.development]
+run = "pnpm --filter @workspace/grooming-academy run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/grooming-academy", "run", "build" ]
+publicDir = "artifacts/grooming-academy/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "21108"
+BASE_PATH = "/"
