@@ -19,6 +19,7 @@ export default function Home() {
               <a href="#nashi-kursy" className="hover:text-primary transition-colors" data-testid="link-nav-courses">Наши курсы</a>
               <a href="#master-klassy" className="hover:text-primary transition-colors" data-testid="link-nav-masterclasses">Мастер-классы</a>
               <a href="#ob-akademii" className="hover:text-primary transition-colors" data-testid="link-nav-about">Об академии</a>
+              <a href="#online" className="hover:text-primary transition-colors" data-testid="link-nav-online">Онлайн-обучение</a>
               <a href="#svyaz" className="hover:text-primary transition-colors" data-testid="link-nav-contact">Связь</a>
             </div>
           </div>
@@ -83,8 +84,8 @@ export default function Home() {
               <div className="text-sm uppercase tracking-widest text-white font-bold" data-testid="text-stat-students-label">Студентов выпустилось</div>
             </motion.div>
             <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.4 }} className="flex flex-col items-center py-4 md:py-0">
-              <div className="text-5xl font-black text-primary mb-2" data-testid="text-stat-salons-val">50+</div>
-              <div className="text-sm uppercase tracking-widest text-white font-bold" data-testid="text-stat-salons-label">Открытых грумингсалонов</div>
+              <div className="text-5xl font-black text-primary mb-2" data-testid="text-stat-masters-val">50+</div>
+              <div className="text-sm uppercase tracking-widest text-white font-bold" data-testid="text-stat-masters-label">Мастеров-выпускников</div>
             </motion.div>
           </div>
         </div>
@@ -243,6 +244,34 @@ export default function Home() {
               <img src="/images/team.png" alt="Команда академии" className="w-full h-auto relative z-10" data-testid="img-about-team" />
             </motion.div>
           </div>
+        </div>
+      </section>
+
+      {/* Online learning section */}
+      <section id="online" className="py-24 bg-card border-y border-border">
+        <div className="container mx-auto px-4 text-center max-w-3xl">
+          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-white mb-6" data-testid="text-online-title">Онлайн-обучение</h2>
+            <div className="w-24 h-1 bg-secondary mx-auto mb-8"></div>
+            <p className="text-lg text-muted-foreground leading-relaxed mb-8" data-testid="text-online-desc">
+              Мы предоставляем доступ к записанным урокам и обучающим материалам в удобном формате. Учитесь в своём темпе — из любой точки мира, без привязки к расписанию.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left mb-10">
+              {[
+                { title: "Видеолекции", desc: "Подробные записи занятий с преподавателями академии" },
+                { title: "Практические материалы", desc: "Учебные пособия, схемы стрижек и чек-листы" },
+                { title: "Поддержка куратора", desc: "Ответы на вопросы от сертифицированных мастеров" }
+              ].map((item, idx) => (
+                <div key={idx} className="bg-background border border-border p-6" data-testid={`card-online-${idx}`}>
+                  <div className="text-primary font-black text-sm uppercase tracking-widest mb-2" data-testid={`text-online-item-title-${idx}`}>{item.title}</div>
+                  <p className="text-muted-foreground text-sm" data-testid={`text-online-item-desc-${idx}`}>{item.desc}</p>
+                </div>
+              ))}
+            </div>
+            <a href="#svyaz" className="inline-block bg-secondary text-white font-black uppercase tracking-widest px-8 py-4 hover:bg-secondary/90 transition-colors" data-testid="button-online-enroll">
+              Записаться на онлайн-курс
+            </a>
+          </motion.div>
         </div>
       </section>
 
