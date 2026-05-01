@@ -1,13 +1,25 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
 import { FaTelegramPlane, FaWhatsapp, FaVk, FaCheck } from "react-icons/fa";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
+const NAV_LINKS = [
+  { href: "#nashi-kursy", label: "Наши курсы", testId: "link-nav-courses" },
+  { href: "#master-klassy", label: "Мастер-классы", testId: "link-nav-masterclasses" },
+  { href: "#ob-akademii", label: "Об академии", testId: "link-nav-about" },
+  { href: "#online", label: "Онлайн-обучение", testId: "link-nav-online" },
+  { href: "#svyaz", label: "Связь", testId: "link-nav-contact" },
+];
+
 export default function Home() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   return (
     <div className="min-h-screen bg-background text-foreground font-sans">
       {/* 1. Navbar */}
@@ -16,11 +28,9 @@ export default function Home() {
           <div className="flex items-center gap-8">
             <Link href="/" className="text-xl font-black tracking-tighter text-primary" data-testid="link-home">MILORD ACADEMY</Link>
             <div className="hidden md:flex items-center gap-6 text-sm font-medium">
-              <a href="#nashi-kursy" className="hover:text-primary transition-colors" data-testid="link-nav-courses">Наши курсы</a>
-              <a href="#master-klassy" className="hover:text-primary transition-colors" data-testid="link-nav-masterclasses">Мастер-классы</a>
-              <a href="#ob-akademii" className="hover:text-primary transition-colors" data-testid="link-nav-about">Об академии</a>
-              <a href="#online" className="hover:text-primary transition-colors" data-testid="link-nav-online">Онлайн-обучение</a>
-              <a href="#svyaz" className="hover:text-primary transition-colors" data-testid="link-nav-contact">Связь</a>
+              {NAV_LINKS.map((link) => (
+                <a key={link.href} href={link.href} className="hover:text-primary transition-colors" data-testid={link.testId}>{link.label}</a>
+              ))}
             </div>
           </div>
           <div className="flex items-center gap-4">
@@ -29,11 +39,50 @@ export default function Home() {
               <a href="https://wa.me/" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-social-whatsapp-nav"><FaWhatsapp size={20} /></a>
               <a href="https://vk.com/" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-social-vk-nav"><FaVk size={20} /></a>
             </div>
-            <Button asChild className="rounded-none font-bold uppercase tracking-wider text-xs md:text-sm" data-testid="button-nav-enroll">
+            <Button asChild className="hidden md:inline-flex rounded-none font-bold uppercase tracking-wider text-sm" data-testid="button-nav-enroll">
               <a href="#svyaz">Запись на курс</a>
             </Button>
+            <button
+              className="md:hidden text-foreground hover:text-primary transition-colors"
+              onClick={() => setMobileOpen((v) => !v)}
+              aria-label="Открыть меню"
+              data-testid="button-mobile-menu"
+            >
+              {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
           </div>
         </div>
+
+        {/* Mobile menu */}
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="md:hidden overflow-hidden border-t border-border bg-background"
+              data-testid="nav-mobile-menu"
+            >
+              <div className="container mx-auto px-4 py-4 flex flex-col gap-4">
+                {NAV_LINKS.map((link) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    className="text-sm font-bold uppercase tracking-wider hover:text-primary transition-colors py-2 border-b border-border last:border-0"
+                    onClick={() => setMobileOpen(false)}
+                    data-testid={`${link.testId}-mobile`}
+                  >
+                    {link.label}
+                  </a>
+                ))}
+                <Button asChild className="rounded-none font-bold uppercase tracking-wider mt-2" data-testid="button-nav-enroll-mobile">
+                  <a href="#svyaz" onClick={() => setMobileOpen(false)}>Запись на курс</a>
+                </Button>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* 2. Hero */}
