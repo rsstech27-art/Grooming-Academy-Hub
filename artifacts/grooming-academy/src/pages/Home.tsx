@@ -204,6 +204,7 @@ export default function Home() {
             <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-white flex items-center justify-center gap-4" data-testid="text-mc-title">
               <FaPaw size={24} className="text-primary opacity-70 rotate-[-10deg]" />
               Мастер-классы
+              <FaPaw size={24} className="text-primary opacity-70 rotate-[10deg] scale-x-[-1]" />
             </h2>
             <div className="w-24 h-1 bg-primary mx-auto mt-6"></div>
           </div>
