@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
-import { FaTelegramPlane, FaWhatsapp, FaVk, FaCheck } from "react-icons/fa";
+import { FaTelegramPlane, FaWhatsapp, FaCheck } from "react-icons/fa";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
@@ -34,10 +34,9 @@ export default function Home() {
             </div>
           </div>
           <div className="flex items-center gap-4">
-            <div className="hidden md:flex items-center gap-4 mr-4">
+            <div className="hidden md:flex items-center gap-6 mr-4">
               <a href="https://t.me/" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-social-telegram-nav"><FaTelegramPlane size={20} /></a>
               <a href="https://wa.me/" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-social-whatsapp-nav"><FaWhatsapp size={20} /></a>
-              <a href="https://vk.com/" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-social-vk-nav"><FaVk size={20} /></a>
             </div>
             <Button asChild className="hidden md:inline-flex rounded-none font-bold uppercase tracking-wider text-sm" data-testid="button-nav-enroll">
               <a href="#svyaz">Запись на курс</a>
@@ -194,10 +193,10 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { img: "/images/mc1.png", title: "Азиатский стиль", date: "15 Мая 2026", desc: "Секреты создания идеальных форм в азиатском стиле для пуделей и йорков." },
-              { img: "/images/mc2.png", title: "Экспресс-линька", date: "22 Мая 2026", desc: "Правильная техника вычеса и работы с двойным типом шерсти." },
-              { img: "/images/mc3.png", title: "Породный груминг шпица", date: "05 Июня 2026", desc: "Тонкости работы с шерстью шпица. Создание объемных форм." },
-              { img: "/images/mc4.png", title: "Креативный груминг", date: "18 Июня 2026", desc: "Окрашивание, блеск-тату, выстригание орнаментов." }
+              { img: "/images/mc1.png", title: "Азиатский стиль", desc: "Секреты создания идеальных форм в азиатском стиле для пуделей и йорков." },
+              { img: "/images/mc2.png", title: "Экспресс-линька", desc: "Правильная техника вычеса и работы с двойным типом шерсти." },
+              { img: "/images/mc3.png", title: "Породный груминг шпица", desc: "Тонкости работы с шерстью шпица. Создание объемных форм." },
+              { img: "/images/mc4.png", title: "Креативный груминг", desc: "Окрашивание, блеск-тату, выстригание орнаментов." }
             ].map((mc, idx) => (
               <motion.div 
                 key={idx}
@@ -211,9 +210,6 @@ export default function Home() {
                 <div className="relative overflow-hidden aspect-[4/3] mb-4">
                   <div className="absolute inset-0 bg-background/20 group-hover:bg-transparent transition-colors z-10" />
                   <img src={mc.img} alt={mc.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-testid={`img-mc-${idx}`} />
-                  <div className="absolute top-4 right-4 bg-secondary text-white text-xs font-bold px-3 py-1 uppercase tracking-widest z-20" data-testid={`text-mc-date-${idx}`}>
-                    {mc.date}
-                  </div>
                 </div>
                 <h3 className="text-xl font-bold uppercase text-white mb-2 group-hover:text-secondary transition-colors" data-testid={`text-mc-title-${idx}`}>{mc.title}</h3>
                 <p className="text-muted-foreground text-sm mb-4" data-testid={`text-mc-desc-${idx}`}>{mc.desc}</p>
@@ -347,31 +343,40 @@ export default function Home() {
                 <Input id="phone" type="tel" placeholder="+7 (999) 000-00-00" className="rounded-none bg-background border-border focus-visible:ring-primary h-12" data-testid="input-contact-phone" />
               </div>
 
-              <div className="space-y-4 pt-2">
+              <div className="space-y-3 pt-2">
                 <Label className="text-xs uppercase tracking-widest font-bold">Предпочтительный способ связи</Label>
-                <RadioGroup defaultValue="whatsapp" className="flex flex-col space-y-2" data-testid="radio-contact-method">
-                  <div className="flex items-center space-x-3">
+                <RadioGroup defaultValue="whatsapp" className="flex flex-row flex-wrap gap-x-8 gap-y-3 pt-1" data-testid="radio-contact-method">
+                  <div className="flex items-center gap-2.5">
                     <RadioGroupItem value="whatsapp" id="r-whatsapp" data-testid="radio-whatsapp" />
-                    <Label htmlFor="r-whatsapp" className="cursor-pointer">WhatsApp</Label>
+                    <Label htmlFor="r-whatsapp" className="cursor-pointer font-medium">WhatsApp</Label>
                   </div>
-                  <div className="flex items-center space-x-3">
+                  <div className="flex items-center gap-2.5">
                     <RadioGroupItem value="telegram" id="r-telegram" data-testid="radio-telegram" />
-                    <Label htmlFor="r-telegram" className="cursor-pointer">Telegram</Label>
+                    <Label htmlFor="r-telegram" className="cursor-pointer font-medium">Telegram</Label>
                   </div>
-                  <div className="flex items-center space-x-3">
+                  <div className="flex items-center gap-2.5">
                     <RadioGroupItem value="call" id="r-call" data-testid="radio-call" />
-                    <Label htmlFor="r-call" className="cursor-pointer">Звонок</Label>
+                    <Label htmlFor="r-call" className="cursor-pointer font-medium">Звонок</Label>
                   </div>
                 </RadioGroup>
               </div>
 
-              <Button type="submit" className="w-full rounded-none font-black uppercase tracking-widest h-14 bg-primary text-primary-foreground hover:bg-primary/90 mt-4" data-testid="button-contact-submit">
+              <div className="flex items-start gap-3 pt-2" data-testid="consent-checkbox-wrapper">
+                <input
+                  type="checkbox"
+                  id="consent"
+                  required
+                  data-testid="checkbox-consent"
+                  className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-[#cda434] rounded-none border border-border"
+                />
+                <Label htmlFor="consent" className="text-xs text-muted-foreground leading-relaxed cursor-pointer">
+                  Я даю согласие на обработку персональных данных в соответствии с Федеральным законом №&nbsp;152-ФЗ
+                </Label>
+              </div>
+
+              <Button type="submit" className="w-full rounded-none font-black uppercase tracking-widest h-14 bg-primary text-primary-foreground hover:bg-primary/90 mt-2" data-testid="button-contact-submit">
                 Отправить
               </Button>
-              
-              <p className="text-xs text-center text-muted-foreground mt-4" data-testid="text-contact-consent">
-                Нажимая на кнопку, вы даете согласие на обработку персональных данных.
-              </p>
             </form>
           </div>
         </div>
@@ -395,9 +400,6 @@ export default function Home() {
               </a>
               <a href="https://wa.me/" target="_blank" rel="noreferrer" className="w-12 h-12 bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors" data-testid="link-social-whatsapp-footer">
                 <FaWhatsapp size={24} />
-              </a>
-              <a href="https://vk.com/" target="_blank" rel="noreferrer" className="w-12 h-12 bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors" data-testid="link-social-vk-footer">
-                <FaVk size={24} />
               </a>
             </div>
           </div>
