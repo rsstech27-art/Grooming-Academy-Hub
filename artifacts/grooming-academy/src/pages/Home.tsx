@@ -201,7 +201,7 @@ export default function Home() {
       <section id="master-klassy" className="py-24 bg-card border-y border-border">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-white flex items-center gap-4" data-testid="text-mc-title">
+            <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-white flex items-center justify-center gap-4" data-testid="text-mc-title">
               <FaPaw size={24} className="text-primary opacity-70 rotate-[-10deg]" />
               Мастер-классы
             </h2>
@@ -438,12 +438,12 @@ export default function Home() {
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.2 }}
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="fixed bottom-8 right-8 z-50 w-16 h-16 flex items-center justify-center hover:scale-110 transition-transform drop-shadow-lg"
+            className="fixed bottom-8 right-8 z-50 w-8 h-8 flex items-center justify-center hover:scale-110 transition-transform drop-shadow-lg"
             aria-label="Наверх"
             data-testid="button-scroll-top"
           >
-            <FaPaw size={64} className="absolute text-primary rotate-[-20deg]" />
-            <ChevronUp size={20} strokeWidth={3} className="relative z-10 text-primary-foreground" />
+            <FaPaw size={32} className="absolute text-primary rotate-[-20deg]" />
+            <ChevronUp size={10} strokeWidth={3} className="relative z-10 text-primary-foreground translate-y-1" />
           </motion.button>
         )}
       </AnimatePresence>
