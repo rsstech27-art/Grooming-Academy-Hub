@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
-import { FaTelegramPlane, FaWhatsapp, FaCheck } from "react-icons/fa";
-import { Menu, X } from "lucide-react";
+import { FaTelegramPlane, FaWhatsapp, FaCheck, FaPaw } from "react-icons/fa";
+import { Menu, X, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -19,6 +19,13 @@ const NAV_LINKS = [
 
 export default function Home() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setShowScrollTop(window.scrollY > 400);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans">
@@ -26,7 +33,10 @@ export default function Home() {
       <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
           <div className="flex items-center gap-8">
-            <Link href="/" className="text-xl font-black tracking-tighter text-primary" data-testid="link-home">MILORD ACADEMY</Link>
+            <Link href="/" className="flex items-center gap-2 text-xl font-black tracking-tighter text-primary" data-testid="link-home">
+              <FaPaw size={18} className="text-primary rotate-[-20deg]" />
+              MILORD ACADEMY
+            </Link>
             <div className="hidden md:flex items-center gap-6 text-sm font-medium">
               {NAV_LINKS.map((link) => (
                 <a key={link.href} href={link.href} className="hover:text-primary transition-colors" data-testid={link.testId}>{link.label}</a>
@@ -143,8 +153,12 @@ export default function Home() {
       <section id="nashi-kursy" className="py-24 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-white" data-testid="text-courses-title">Старт обучения</h2>
-            <div className="w-24 h-1 bg-secondary mx-auto mt-6"></div>
+            <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-white flex items-center justify-center gap-4" data-testid="text-courses-title">
+              <FaPaw size={28} className="text-primary opacity-80 rotate-[-15deg]" />
+              Старт обучения
+              <FaPaw size={28} className="text-primary opacity-80 rotate-[15deg] scale-x-[-1]" />
+            </h2>
+            <div className="w-24 h-1 bg-primary mx-auto mt-6"></div>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -187,7 +201,10 @@ export default function Home() {
       <section id="master-klassy" className="py-24 bg-card border-y border-border">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-white" data-testid="text-mc-title">Мастер-классы</h2>
+            <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter text-white flex items-center gap-4" data-testid="text-mc-title">
+              <FaPaw size={24} className="text-primary opacity-70 rotate-[-10deg]" />
+              Мастер-классы
+            </h2>
             <div className="w-24 h-1 bg-primary mx-auto mt-6"></div>
           </div>
           
@@ -387,10 +404,13 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="text-center md:text-left">
-              <div className="text-2xl font-black tracking-tighter text-white mb-2" data-testid="text-footer-brand">MILORD ACADEMY</div>
+              <div className="flex items-center gap-2 text-2xl font-black tracking-tighter text-white mb-2" data-testid="text-footer-brand">
+                <FaPaw size={20} className="text-primary rotate-[-20deg]" />
+                MILORD ACADEMY
+              </div>
               <div className="text-muted-foreground text-sm" data-testid="text-footer-address">
                 Академия груминга<br />
-                г. Хабаровск, ул. Примерная, д. 1
+                г. Хабаровск, ул. Ленинградская, д. 99
               </div>
             </div>
             
@@ -409,6 +429,23 @@ export default function Home() {
           </div>
         </div>
       </footer>
+      {/* Scroll to top */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.2 }}
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="fixed bottom-8 right-8 z-50 w-12 h-12 bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary/90 transition-colors shadow-lg"
+            aria-label="Наверх"
+            data-testid="button-scroll-top"
+          >
+            <ChevronUp size={20} strokeWidth={3} />
+          </motion.button>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
