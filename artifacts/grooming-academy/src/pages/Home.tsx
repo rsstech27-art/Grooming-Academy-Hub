@@ -425,8 +425,16 @@ export default function Home() {
             </div>
           </div>
           
-          <div className="border-t border-border mt-12 pt-8 text-center text-xs text-muted-foreground uppercase tracking-widest" data-testid="text-footer-copyright">
-            © {new Date().getFullYear()} MILORD ACADEMY KHABAROVSK. ВСЕ ПРАВА ЗАЩИЩЕНЫ.
+          <div className="border-t border-border mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-foreground uppercase tracking-widest" data-testid="text-footer-copyright">
+            <span>© {new Date().getFullYear()} MILORD ACADEMY KHABAROVSK. ВСЕ ПРАВА ЗАЩИЩЕНЫ.</span>
+            <div className="flex items-center gap-6">
+              <Link href="/privacy-policy" className="hover:text-primary transition-colors" data-testid="link-footer-privacy">
+                Политика обработки данных
+              </Link>
+              <Link href="/consent" className="hover:text-primary transition-colors" data-testid="link-footer-consent">
+                Согласие на обработку
+              </Link>
+            </div>
           </div>
         </div>
       </footer>
