@@ -112,7 +112,7 @@ export default function Home() {
               <Button asChild size="lg" className="w-full sm:w-auto rounded-none font-bold uppercase tracking-wider bg-primary text-primary-foreground hover:bg-primary/90 h-14 px-8" data-testid="button-hero-courses">
                 <a href="#nashi-kursy">Выбрать программу обучения</a>
               </Button>
-              <Button asChild size="lg" variant="outline" className="w-full sm:w-auto rounded-none font-bold uppercase tracking-wider border-secondary text-secondary hover:bg-secondary hover:text-secondary-foreground h-14 px-8" data-testid="button-hero-masterclasses">
+              <Button asChild size="lg" variant="outline" className="w-full sm:w-auto rounded-none font-bold uppercase tracking-wider border-primary text-primary hover:bg-primary hover:text-primary-foreground h-14 px-8" data-testid="button-hero-masterclasses">
                 <a href="#master-klassy">Выбрать мастер-класс</a>
               </Button>
             </div>
