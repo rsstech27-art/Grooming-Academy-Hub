@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
 import { FaTelegramPlane, FaWhatsapp, FaCheck, FaPaw } from "react-icons/fa";
-import { Menu, X, ChevronUp } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -438,11 +438,11 @@ export default function Home() {
             exit={{ opacity: 0, scale: 0.8 }}
             transition={{ duration: 0.2 }}
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="fixed bottom-8 right-8 z-50 w-12 h-12 bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary/90 transition-colors shadow-lg"
+            className="fixed bottom-8 right-8 z-50 w-14 h-14 bg-primary text-primary-foreground flex items-center justify-center hover:bg-primary/90 transition-colors shadow-lg rounded-full"
             aria-label="Наверх"
             data-testid="button-scroll-top"
           >
-            <ChevronUp size={20} strokeWidth={3} />
+            <FaPaw size={22} className="rotate-[-20deg]" />
           </motion.button>
         )}
       </AnimatePresence>
