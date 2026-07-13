@@ -17,9 +17,31 @@ const NAV_LINKS = [
   { href: "#svyaz", label: "Связь", testId: "link-nav-contact" },
 ];
 
+const TG_BOT_TOKEN = "8021390193:AAHtBelK9tzRK3-KZsvve7eVEdk4h6HjQcI";
+const TG_CHAT_ID = "616597664";
+
+async function sendToTelegram(name: string, phone: string, method: string) {
+  const text =
+    `📋 *Новая заявка с сайта*\n\n` +
+    `👤 Имя: ${name}\n` +
+    `📞 Телефон: ${phone}\n` +
+    `💬 Способ связи: ${method}`;
+  const url = `https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`;
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ chat_id: TG_CHAT_ID, text, parse_mode: "Markdown" }),
+  });
+  if (!res.ok) throw new Error("Telegram API error");
+}
+
 export default function Home() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
+  const [formName, setFormName] = useState("");
+  const [formPhone, setFormPhone] = useState("");
+  const [formMethod, setFormMethod] = useState("whatsapp");
+  const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
   useEffect(() => {
     const onScroll = () => setShowScrollTop(window.scrollY > 400);
@@ -350,20 +372,53 @@ export default function Home() {
               Оставьте заявку, и мы свяжемся с вами для консультации
             </p>
 
-            <form className="space-y-6" onSubmit={(e) => e.preventDefault()} data-testid="form-contact">
+            <form
+              className="space-y-6"
+              onSubmit={async (e) => {
+                e.preventDefault();
+                setFormStatus("sending");
+                try {
+                  await sendToTelegram(formName, formPhone, formMethod);
+                  setFormStatus("success");
+                  setFormName("");
+                  setFormPhone("");
+                  setFormMethod("whatsapp");
+                } catch {
+                  setFormStatus("error");
+                }
+              }}
+              data-testid="form-contact"
+            >
               <div className="space-y-2">
                 <Label htmlFor="name" className="text-xs uppercase tracking-widest font-bold">Имя</Label>
-                <Input id="name" placeholder="Ваше имя" className="rounded-none bg-background border-border focus-visible:ring-primary h-12" data-testid="input-contact-name" />
+                <Input
+                  id="name"
+                  placeholder="Ваше имя"
+                  required
+                  value={formName}
+                  onChange={(e) => setFormName(e.target.value)}
+                  className="rounded-none bg-background border-border focus-visible:ring-primary h-12"
+                  data-testid="input-contact-name"
+                />
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="phone" className="text-xs uppercase tracking-widest font-bold">Телефон</Label>
-                <Input id="phone" type="tel" placeholder="+7 (999) 000-00-00" className="rounded-none bg-background border-border focus-visible:ring-primary h-12" data-testid="input-contact-phone" />
+                <Input
+                  id="phone"
+                  type="tel"
+                  placeholder="+7 (999) 000-00-00"
+                  required
+                  value={formPhone}
+                  onChange={(e) => setFormPhone(e.target.value)}
+                  className="rounded-none bg-background border-border focus-visible:ring-primary h-12"
+                  data-testid="input-contact-phone"
+                />
               </div>
 
               <div className="space-y-3 pt-2">
                 <Label className="text-xs uppercase tracking-widest font-bold">Предпочтительный способ связи</Label>
-                <RadioGroup defaultValue="whatsapp" className="flex flex-row flex-wrap gap-x-8 gap-y-3 pt-1" data-testid="radio-contact-method">
+                <RadioGroup value={formMethod} onValueChange={setFormMethod} className="flex flex-row flex-wrap gap-x-8 gap-y-3 pt-1" data-testid="radio-contact-method">
                   <div className="flex items-center gap-2.5">
                     <RadioGroupItem value="whatsapp" id="r-whatsapp" data-testid="radio-whatsapp" />
                     <Label htmlFor="r-whatsapp" className="cursor-pointer font-medium">WhatsApp</Label>
@@ -392,8 +447,24 @@ export default function Home() {
                 </Label>
               </div>
 
-              <Button type="submit" className="w-full rounded-none font-black uppercase tracking-widest h-14 bg-primary text-primary-foreground hover:bg-primary/90 mt-2" data-testid="button-contact-submit">
-                Отправить
+              {formStatus === "success" && (
+                <div className="text-center py-3 px-4 bg-primary/10 border border-primary text-primary font-bold uppercase tracking-widest text-sm" data-testid="form-success-message">
+                  ✓ Заявка отправлена! Мы свяжемся с вами.
+                </div>
+              )}
+              {formStatus === "error" && (
+                <div className="text-center py-3 px-4 bg-red-500/10 border border-red-500 text-red-400 font-bold uppercase tracking-widest text-sm" data-testid="form-error-message">
+                  Ошибка отправки. Попробуйте ещё раз.
+                </div>
+              )}
+
+              <Button
+                type="submit"
+                disabled={formStatus === "sending"}
+                className="w-full rounded-none font-black uppercase tracking-widest h-14 bg-primary text-primary-foreground hover:bg-primary/90 mt-2 disabled:opacity-60"
+                data-testid="button-contact-submit"
+              >
+                {formStatus === "sending" ? "Отправка..." : "Отправить"}
               </Button>
             </form>
           </div>
