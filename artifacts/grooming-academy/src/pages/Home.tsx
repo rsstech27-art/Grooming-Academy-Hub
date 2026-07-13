@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
 import { FaTelegramPlane, FaWhatsapp, FaCheck, FaPaw } from "react-icons/fa";
-import { Menu, X, ChevronUp, MessageCircle } from "lucide-react";
+import { Menu, X, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -17,31 +17,9 @@ const NAV_LINKS = [
   { href: "#svyaz", label: "Связь", testId: "link-nav-contact" },
 ];
 
-const TG_BOT_TOKEN = "8021390193:AAHtBelK9tzRK3-KZsvve7eVEdk4h6HjQcI";
-const TG_CHAT_ID = "616597664";
-
-async function sendToTelegram(name: string, phone: string, method: string) {
-  const text =
-    `📋 *Новая заявка с сайта*\n\n` +
-    `👤 Имя: ${name}\n` +
-    `📞 Телефон: ${phone}\n` +
-    `💬 Способ связи: ${method}`;
-  const url = `https://api.telegram.org/bot${TG_BOT_TOKEN}/sendMessage`;
-  const res = await fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ chat_id: TG_CHAT_ID, text, parse_mode: "Markdown" }),
-  });
-  if (!res.ok) throw new Error("Telegram API error");
-}
-
 export default function Home() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
-  const [formName, setFormName] = useState("");
-  const [formPhone, setFormPhone] = useState("");
-  const [formMethod, setFormMethod] = useState("whatsapp");
-  const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
 
   useEffect(() => {
     const onScroll = () => setShowScrollTop(window.scrollY > 400);
@@ -67,12 +45,8 @@ export default function Home() {
           </div>
           <div className="flex items-center gap-4">
             <div className="hidden md:flex items-center gap-6 mr-4">
-              <a href="https://t.me/+79141591420" target="_blank" rel="noreferrer" className="flex items-center justify-center w-9 h-9 text-white transition-opacity hover:opacity-80" style={{ backgroundColor: "#0088cc" }} data-testid="link-social-telegram-nav">
-                <MessageCircle size={18} />
-              </a>
-              <a href="https://wa.me/79141591420" target="_blank" rel="noreferrer" className="flex items-center justify-center w-9 h-9 text-white transition-opacity hover:opacity-80" style={{ backgroundColor: "#25D366" }} data-testid="link-social-whatsapp-nav">
-                <MessageCircle size={18} />
-              </a>
+              <a href="https://t.me/" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-social-telegram-nav"><FaTelegramPlane size={20} /></a>
+              <a href="https://wa.me/" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-social-whatsapp-nav"><FaWhatsapp size={20} /></a>
             </div>
             <Button asChild className="hidden md:inline-flex rounded-none font-bold uppercase tracking-wider text-sm" data-testid="button-nav-enroll">
               <a href="#svyaz">Запись на курс</a>
@@ -376,53 +350,20 @@ export default function Home() {
               Оставьте заявку, и мы свяжемся с вами для консультации
             </p>
 
-            <form
-              className="space-y-6"
-              onSubmit={async (e) => {
-                e.preventDefault();
-                setFormStatus("sending");
-                try {
-                  await sendToTelegram(formName, formPhone, formMethod);
-                  setFormStatus("success");
-                  setFormName("");
-                  setFormPhone("");
-                  setFormMethod("whatsapp");
-                } catch {
-                  setFormStatus("error");
-                }
-              }}
-              data-testid="form-contact"
-            >
+            <form className="space-y-6" onSubmit={(e) => e.preventDefault()} data-testid="form-contact">
               <div className="space-y-2">
                 <Label htmlFor="name" className="text-xs uppercase tracking-widest font-bold">Имя</Label>
-                <Input
-                  id="name"
-                  placeholder="Ваше имя"
-                  required
-                  value={formName}
-                  onChange={(e) => setFormName(e.target.value)}
-                  className="rounded-none bg-background border-border focus-visible:ring-primary h-12"
-                  data-testid="input-contact-name"
-                />
+                <Input id="name" placeholder="Ваше имя" className="rounded-none bg-background border-border focus-visible:ring-primary h-12" data-testid="input-contact-name" />
               </div>
-
+              
               <div className="space-y-2">
                 <Label htmlFor="phone" className="text-xs uppercase tracking-widest font-bold">Телефон</Label>
-                <Input
-                  id="phone"
-                  type="tel"
-                  placeholder="+7 (999) 000-00-00"
-                  required
-                  value={formPhone}
-                  onChange={(e) => setFormPhone(e.target.value)}
-                  className="rounded-none bg-background border-border focus-visible:ring-primary h-12"
-                  data-testid="input-contact-phone"
-                />
+                <Input id="phone" type="tel" placeholder="+7 (999) 000-00-00" className="rounded-none bg-background border-border focus-visible:ring-primary h-12" data-testid="input-contact-phone" />
               </div>
 
               <div className="space-y-3 pt-2">
                 <Label className="text-xs uppercase tracking-widest font-bold">Предпочтительный способ связи</Label>
-                <RadioGroup value={formMethod} onValueChange={setFormMethod} className="flex flex-row flex-wrap gap-x-8 gap-y-3 pt-1" data-testid="radio-contact-method">
+                <RadioGroup defaultValue="whatsapp" className="flex flex-row flex-wrap gap-x-8 gap-y-3 pt-1" data-testid="radio-contact-method">
                   <div className="flex items-center gap-2.5">
                     <RadioGroupItem value="whatsapp" id="r-whatsapp" data-testid="radio-whatsapp" />
                     <Label htmlFor="r-whatsapp" className="cursor-pointer font-medium">WhatsApp</Label>
@@ -451,24 +392,8 @@ export default function Home() {
                 </Label>
               </div>
 
-              {formStatus === "success" && (
-                <div className="text-center py-3 px-4 bg-primary/10 border border-primary text-primary font-bold uppercase tracking-widest text-sm" data-testid="form-success-message">
-                  ✓ Заявка отправлена! Мы свяжемся с вами.
-                </div>
-              )}
-              {formStatus === "error" && (
-                <div className="text-center py-3 px-4 bg-red-500/10 border border-red-500 text-red-400 font-bold uppercase tracking-widest text-sm" data-testid="form-error-message">
-                  Ошибка отправки. Попробуйте ещё раз.
-                </div>
-              )}
-
-              <Button
-                type="submit"
-                disabled={formStatus === "sending"}
-                className="w-full rounded-none font-black uppercase tracking-widest h-14 bg-primary text-primary-foreground hover:bg-primary/90 mt-2 disabled:opacity-60"
-                data-testid="button-contact-submit"
-              >
-                {formStatus === "sending" ? "Отправка..." : "Отправить"}
+              <Button type="submit" className="w-full rounded-none font-black uppercase tracking-widest h-14 bg-primary text-primary-foreground hover:bg-primary/90 mt-2" data-testid="button-contact-submit">
+                Отправить
               </Button>
             </form>
           </div>
@@ -484,24 +409,19 @@ export default function Home() {
                 <FaPaw size={20} className="text-primary rotate-[-20deg]" />
                 MILORD ACADEMY
               </div>
-              <div className="text-muted-foreground text-sm space-y-1" data-testid="text-footer-address">
-                <div>Академия груминга</div>
-                <div>г. Хабаровск, ул. Ленинградская, д. 99</div>
-                <a href="tel:+79141591420" className="text-white font-bold hover:text-primary transition-colors" data-testid="link-footer-phone">
-                  +7 (914) 159 14 20
-                </a>
+              <div className="text-muted-foreground text-sm" data-testid="text-footer-address">
+                Академия груминга<br />
+                г. Хабаровск, ул. Ленинградская, д. 99
               </div>
             </div>
-
-            <div className="flex flex-col items-center md:items-end gap-4">
-              <div className="flex flex-col gap-3">
-                <a href="https://t.me/+79141591420" target="_blank" rel="noreferrer" className="flex items-center justify-center w-10 h-10 text-white transition-opacity hover:opacity-80" style={{ backgroundColor: "#0088cc" }} data-testid="link-social-telegram-footer">
-                  <MessageCircle size={20} />
-                </a>
-                <a href="https://wa.me/79141591420" target="_blank" rel="noreferrer" className="flex items-center justify-center w-10 h-10 text-white transition-opacity hover:opacity-80" style={{ backgroundColor: "#25D366" }} data-testid="link-social-whatsapp-footer">
-                  <MessageCircle size={20} />
-                </a>
-              </div>
+            
+            <div className="flex items-center gap-6">
+              <a href="https://t.me/" target="_blank" rel="noreferrer" className="w-12 h-12 bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors" data-testid="link-social-telegram-footer">
+                <FaTelegramPlane size={24} />
+              </a>
+              <a href="https://wa.me/" target="_blank" rel="noreferrer" className="w-12 h-12 bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors" data-testid="link-social-whatsapp-footer">
+                <FaWhatsapp size={24} />
+              </a>
             </div>
           </div>
           
@@ -515,12 +435,6 @@ export default function Home() {
                 Согласие на обработку
               </Link>
             </div>
-          </div>
-          <div className="mt-4 text-center text-xs text-muted-foreground/40">
-            Сайт создан{" "}
-            <a href="https://ai-rss.ru" target="_blank" rel="noreferrer" className="hover:text-muted-foreground transition-colors">
-              ai-rss.ru
-            </a>
           </div>
         </div>
       </footer>
