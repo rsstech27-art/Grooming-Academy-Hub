@@ -66,7 +66,7 @@ export default function Home() {
             </div>
           </div>
           <div className="flex items-center gap-4">
-            <div className="hidden md:flex items-center gap-6 mr-4">
+            <div className="hidden md:flex items-center gap-1 ml-8 mr-4">
               <a href="https://t.me/+79141591420" target="_blank" rel="noreferrer" className="flex items-center justify-center w-9 h-9 transition-opacity hover:opacity-80" style={{ color: "#0088cc" }} data-testid="link-social-telegram-nav">
                 <MessageCircle size={22} />
               </a>
