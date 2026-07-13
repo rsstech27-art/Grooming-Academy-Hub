@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "wouter";
 import { FaTelegramPlane, FaWhatsapp, FaCheck, FaPaw } from "react-icons/fa";
-import { Menu, X, ChevronUp } from "lucide-react";
+import { Menu, X, ChevronUp, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -67,8 +67,14 @@ export default function Home() {
           </div>
           <div className="flex items-center gap-4">
             <div className="hidden md:flex items-center gap-6 mr-4">
-              <a href="https://t.me/+79141591420" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-social-telegram-nav"><FaTelegramPlane size={20} /></a>
-              <a href="https://wa.me/79141591420" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-social-whatsapp-nav"><FaWhatsapp size={20} /></a>
+              <a href="https://t.me/+79141591420" target="_blank" rel="noreferrer" className="flex items-center gap-1.5 px-3 py-1.5 text-white text-xs font-bold uppercase tracking-wider transition-opacity hover:opacity-80" style={{ backgroundColor: "#0088cc" }} data-testid="link-social-telegram-nav">
+                <MessageCircle size={14} />
+                Написать
+              </a>
+              <a href="https://wa.me/79141591420" target="_blank" rel="noreferrer" className="flex items-center gap-1.5 px-3 py-1.5 text-white text-xs font-bold uppercase tracking-wider transition-opacity hover:opacity-80" style={{ backgroundColor: "#25D366" }} data-testid="link-social-whatsapp-nav">
+                <MessageCircle size={14} />
+                Написать
+              </a>
             </div>
             <Button asChild className="hidden md:inline-flex rounded-none font-bold uppercase tracking-wider text-sm" data-testid="button-nav-enroll">
               <a href="#svyaz">Запись на курс</a>
@@ -491,13 +497,13 @@ export default function Home() {
 
             <div className="flex flex-col items-center md:items-end gap-4">
               <div className="flex items-center gap-4">
-                <a href="https://t.me/+79141591420" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-4 py-2 bg-card border border-border text-muted-foreground hover:text-primary hover:border-primary transition-colors text-sm font-bold uppercase tracking-wider" data-testid="link-social-telegram-footer">
-                  <FaTelegramPlane size={18} />
-                  Telegram
+                <a href="https://t.me/+79141591420" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-5 py-3 text-white text-sm font-bold uppercase tracking-wider transition-opacity hover:opacity-80" style={{ backgroundColor: "#0088cc" }} data-testid="link-social-telegram-footer">
+                  <MessageCircle size={18} />
+                  Написать
                 </a>
-                <a href="https://wa.me/79141591420" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-4 py-2 bg-card border border-border text-muted-foreground hover:text-primary hover:border-primary transition-colors text-sm font-bold uppercase tracking-wider" data-testid="link-social-whatsapp-footer">
-                  <FaWhatsapp size={18} />
-                  WhatsApp
+                <a href="https://wa.me/79141591420" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-5 py-3 text-white text-sm font-bold uppercase tracking-wider transition-opacity hover:opacity-80" style={{ backgroundColor: "#25D366" }} data-testid="link-social-whatsapp-footer">
+                  <MessageCircle size={18} />
+                  Написать
                 </a>
               </div>
             </div>
