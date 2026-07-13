@@ -67,8 +67,8 @@ export default function Home() {
           </div>
           <div className="flex items-center gap-4">
             <div className="hidden md:flex items-center gap-6 mr-4">
-              <a href="https://t.me/" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-social-telegram-nav"><FaTelegramPlane size={20} /></a>
-              <a href="https://wa.me/" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-social-whatsapp-nav"><FaWhatsapp size={20} /></a>
+              <a href="https://t.me/+79141591420" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-social-telegram-nav"><FaTelegramPlane size={20} /></a>
+              <a href="https://wa.me/79141591420" target="_blank" rel="noreferrer" className="text-muted-foreground hover:text-primary transition-colors" data-testid="link-social-whatsapp-nav"><FaWhatsapp size={20} /></a>
             </div>
             <Button asChild className="hidden md:inline-flex rounded-none font-bold uppercase tracking-wider text-sm" data-testid="button-nav-enroll">
               <a href="#svyaz">Запись на курс</a>
@@ -480,19 +480,26 @@ export default function Home() {
                 <FaPaw size={20} className="text-primary rotate-[-20deg]" />
                 MILORD ACADEMY
               </div>
-              <div className="text-muted-foreground text-sm" data-testid="text-footer-address">
-                Академия груминга<br />
-                г. Хабаровск, ул. Ленинградская, д. 99
+              <div className="text-muted-foreground text-sm space-y-1" data-testid="text-footer-address">
+                <div>Академия груминга</div>
+                <div>г. Хабаровск, ул. Ленинградская, д. 99</div>
+                <a href="tel:+79141591420" className="text-white font-bold hover:text-primary transition-colors" data-testid="link-footer-phone">
+                  +7 (914) 159 14 20
+                </a>
               </div>
             </div>
-            
-            <div className="flex items-center gap-6">
-              <a href="https://t.me/" target="_blank" rel="noreferrer" className="w-12 h-12 bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors" data-testid="link-social-telegram-footer">
-                <FaTelegramPlane size={24} />
-              </a>
-              <a href="https://wa.me/" target="_blank" rel="noreferrer" className="w-12 h-12 bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors" data-testid="link-social-whatsapp-footer">
-                <FaWhatsapp size={24} />
-              </a>
+
+            <div className="flex flex-col items-center md:items-end gap-4">
+              <div className="flex items-center gap-4">
+                <a href="https://t.me/+79141591420" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-4 py-2 bg-card border border-border text-muted-foreground hover:text-primary hover:border-primary transition-colors text-sm font-bold uppercase tracking-wider" data-testid="link-social-telegram-footer">
+                  <FaTelegramPlane size={18} />
+                  Telegram
+                </a>
+                <a href="https://wa.me/79141591420" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-4 py-2 bg-card border border-border text-muted-foreground hover:text-primary hover:border-primary transition-colors text-sm font-bold uppercase tracking-wider" data-testid="link-social-whatsapp-footer">
+                  <FaWhatsapp size={18} />
+                  WhatsApp
+                </a>
+              </div>
             </div>
           </div>
           
