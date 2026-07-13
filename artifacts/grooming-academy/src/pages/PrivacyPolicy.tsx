@@ -8,7 +8,7 @@ export default function PrivacyPolicy() {
         <div className="container mx-auto px-4 h-16 flex items-center">
           <Link href="/" className="flex items-center gap-2 text-xl font-black tracking-tighter text-primary">
             <FaPaw size={18} className="text-primary rotate-[-20deg]" />
-            MILORD ACADEMY
+            АКАДЕМИЯ МИЛОРД
           </Link>
         </div>
       </nav>

@@ -57,7 +57,7 @@ export default function Home() {
           <div className="flex items-center gap-8">
             <Link href="/" className="flex items-center gap-2 text-xl font-black tracking-tighter text-primary" data-testid="link-home">
               <FaPaw size={18} className="text-primary rotate-[-20deg]" />
-              MILORD ACADEMY
+              АКАДЕМИЯ МИЛОРД
             </Link>
             <div className="hidden md:flex items-center gap-6 text-sm font-medium">
               {NAV_LINKS.map((link) => (
@@ -482,7 +482,7 @@ export default function Home() {
             <div className="text-center md:text-left">
               <div className="flex items-center gap-2 text-2xl font-black tracking-tighter text-white mb-2" data-testid="text-footer-brand">
                 <FaPaw size={20} className="text-primary rotate-[-20deg]" />
-                MILORD ACADEMY
+                АКАДЕМИЯ МИЛОРД
               </div>
               <div className="text-muted-foreground text-sm space-y-1" data-testid="text-footer-address">
                 <div>Академия груминга</div>
@@ -506,7 +506,7 @@ export default function Home() {
           </div>
           
           <div className="border-t border-border mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-foreground uppercase tracking-widest" data-testid="text-footer-copyright">
-            <span>© {new Date().getFullYear()} MILORD ACADEMY KHABAROVSK. ВСЕ ПРАВА ЗАЩИЩЕНЫ.</span>
+            <span>© {new Date().getFullYear()} АКАДЕМИЯ МИЛОРД ХАБАРОВСК. ВСЕ ПРАВА ЗАЩИЩЕНЫ.</span>
             <div className="flex items-center gap-6">
               <Link href="/privacy-policy" className="hover:text-primary transition-colors" data-testid="link-footer-privacy">
                 Политика обработки данных
