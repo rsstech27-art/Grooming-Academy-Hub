@@ -494,14 +494,12 @@ export default function Home() {
             </div>
 
             <div className="flex flex-col items-center md:items-end gap-4">
-              <div className="flex items-center gap-4">
-                <a href="https://t.me/+79141591420" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-5 py-3 text-white text-sm font-bold uppercase tracking-wider transition-opacity hover:opacity-80" style={{ backgroundColor: "#0088cc" }} data-testid="link-social-telegram-footer">
-                  <MessageCircle size={18} />
-                  Написать
+              <div className="flex flex-col gap-3">
+                <a href="https://t.me/+79141591420" target="_blank" rel="noreferrer" className="flex items-center justify-center w-10 h-10 text-white transition-opacity hover:opacity-80" style={{ backgroundColor: "#0088cc" }} data-testid="link-social-telegram-footer">
+                  <MessageCircle size={20} />
                 </a>
-                <a href="https://wa.me/79141591420" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-5 py-3 text-white text-sm font-bold uppercase tracking-wider transition-opacity hover:opacity-80" style={{ backgroundColor: "#25D366" }} data-testid="link-social-whatsapp-footer">
-                  <MessageCircle size={18} />
-                  Написать
+                <a href="https://wa.me/79141591420" target="_blank" rel="noreferrer" className="flex items-center justify-center w-10 h-10 text-white transition-opacity hover:opacity-80" style={{ backgroundColor: "#25D366" }} data-testid="link-social-whatsapp-footer">
+                  <MessageCircle size={20} />
                 </a>
               </div>
             </div>
