@@ -67,13 +67,11 @@ export default function Home() {
           </div>
           <div className="flex items-center gap-4">
             <div className="hidden md:flex items-center gap-6 mr-4">
-              <a href="https://t.me/+79141591420" target="_blank" rel="noreferrer" className="flex items-center gap-1.5 px-3 py-1.5 text-white text-xs font-bold uppercase tracking-wider transition-opacity hover:opacity-80" style={{ backgroundColor: "#0088cc" }} data-testid="link-social-telegram-nav">
-                <MessageCircle size={14} />
-                Написать
+              <a href="https://t.me/+79141591420" target="_blank" rel="noreferrer" className="flex items-center justify-center w-9 h-9 text-white transition-opacity hover:opacity-80" style={{ backgroundColor: "#0088cc" }} data-testid="link-social-telegram-nav">
+                <MessageCircle size={18} />
               </a>
-              <a href="https://wa.me/79141591420" target="_blank" rel="noreferrer" className="flex items-center gap-1.5 px-3 py-1.5 text-white text-xs font-bold uppercase tracking-wider transition-opacity hover:opacity-80" style={{ backgroundColor: "#25D366" }} data-testid="link-social-whatsapp-nav">
-                <MessageCircle size={14} />
-                Написать
+              <a href="https://wa.me/79141591420" target="_blank" rel="noreferrer" className="flex items-center justify-center w-9 h-9 text-white transition-opacity hover:opacity-80" style={{ backgroundColor: "#25D366" }} data-testid="link-social-whatsapp-nav">
+                <MessageCircle size={18} />
               </a>
             </div>
             <Button asChild className="hidden md:inline-flex rounded-none font-bold uppercase tracking-wider text-sm" data-testid="button-nav-enroll">
