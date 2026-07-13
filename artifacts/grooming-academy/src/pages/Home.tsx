@@ -516,6 +516,12 @@ export default function Home() {
               </Link>
             </div>
           </div>
+          <div className="mt-4 text-center text-xs text-muted-foreground/40">
+            Сайт создан{" "}
+            <a href="https://ai-rss.ru" target="_blank" rel="noreferrer" className="hover:text-muted-foreground transition-colors">
+              ai-rss.ru
+            </a>
+          </div>
         </div>
       </footer>
       {/* Scroll to top */}
